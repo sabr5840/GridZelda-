@@ -8,11 +8,13 @@ body {
 }
 
 #gamefield{
-    width: calc(26 * 32px); /* 26 kolonner */
-    height: calc(20 * 32px); /* 20 rækker */
+    width: calc(23 * 32px); 
+    height: calc(19 * 32px); 
     border: 4px solid rgb(0, 0, 0);
     width: fit-content;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap; /* Sørger for at tiles går til næste række ved grænsen */
+
     background-color: rgb(202, 200, 205);
     position: relative; /* Til positionering af #player relativt til #gamefield */
 
@@ -21,13 +23,91 @@ body {
 
 #background{
     grid-area: 1 / 1;
-    width: calc(26 * 32px);
-    height: calc(20 * 32px);
+    width: calc(23 * 32px); 
+    height: calc(19 * 32px); 
 
 }
 
 #items{
     grid-area: 1 / 1;
+}
+
+.tile {
+    width: 32px; /* Størrelsen på dine tiles */
+    height: 32px;
+    float: left; /* Sørger for at tiles lægger sig ved siden af hinanden */
+    background-size: cover; /* Sikrer at billedet dækker hele tile'en */
+    flex: 0 0 32px; /* Sætter flex-grow til 0, flex-shrink til 0, og flex-basis til 32px */
+
+}
+
+.grass {
+    background-image: url('simple-assets/images/tiles/grass.png');
+    image-rendering: pixelated;
+}
+
+.redwall {
+    background-image: url('simple-assets/images/tiles/redwall.png');
+    image-rendering: pixelated;
+
+}
+
+.mine {
+    background-image: url('simple-assets/images/tiles/mine.png');
+    image-rendering: pixelated;
+
+}
+
+.cliff {
+    background-image: url('simple-assets/images/tiles/cliff.png');
+    image-rendering: pixelated;
+
+}
+
+.floor {
+    background-image: url('simple-assets/images/tiles/floor_planks.png');
+    image-rendering: pixelated;
+}
+
+.door {
+    background-image: url('simple-assets/images/tiles/door.png');
+    image-rendering: pixelated;
+
+}
+
+.well {
+    background-image: url('simple-assets/images/tiles/well.png');
+    image-rendering: pixelated;
+}
+
+.flower {
+    background-image: url('simple-assets/images/tiles/flowers.png');
+    image-rendering: pixelated;
+}
+
+.path {
+    background-image: url('simple-assets/images/tiles/path.png');
+    image-rendering: pixelated;
+}
+
+.lava {
+    background-image: url('simple-assets/images/tiles/lava.png');
+    image-rendering: pixelated;
+}
+
+.tree {
+    background-image: url('simple-assets/images/tiles/tree.png');
+    image-rendering: pixelated;
+}
+
+.floorStone {
+    background-image: url('simple-assets/images/tiles/floor_stone.png');
+    image-rendering: pixelated;
+}
+
+.water {
+    background-image: url('simple-assets/images/tiles/water.png');
+    image-rendering: pixelated;
 }
 
 #characters{
@@ -36,17 +116,13 @@ body {
 
 #player{
     width: 32px;
+    height: 30px;
     aspect-ratio: 16 / 20;
     background-image: url('images/Character 9.png');
     background-size: 400% 400%;
     image-rendering: pixelated;
-
     background-position: -100% 0%;
-
     position: absolute; /* Absolut positionering i forhold til #gamefield */
-
-
-   
 }
 
 #player.animate{
@@ -69,8 +145,6 @@ body {
         background-position: -400% 0%;
     }
 }
-
-
 
 #player.up{
     background-position: 0% -100%; /* Adjust these values to match your sprite sheet */

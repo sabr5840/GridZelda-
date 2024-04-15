@@ -43,6 +43,7 @@ function start() {
     requestAnimationFrame(tick);
 }
 
+
 const player = {
     x: 0,
     y: 0,
@@ -127,13 +128,19 @@ function displayPlayerAnimation() {
     }
 }
 
-function canMoveTo (pos){
-    if(pos.x < 0 || player.x > 484 || pos.y < 0 || pos.y > 340 ){
+function canMoveTo(pos) {
+    const gameFieldWidth = 736; // Bredden af spillepladen
+    const gameFieldHeight = 608; // Højden af spillepladen
+    const playerWidth = 32; // Bredde af spilleren
+    const playerHeight = 30; // Højde af spilleren
+
+    if (pos.x < 0 || pos.x > (gameFieldWidth - playerWidth) || pos.y < 0 || pos.y > (gameFieldHeight - playerHeight)) {
         return false;
-    }else{
+    } else {
         return true;
     }
 }
+
 
 
 
