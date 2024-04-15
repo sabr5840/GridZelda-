@@ -1,0 +1,118 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Sikrer at body tager mindst hele skærmens højde */
+    margin: 0; /* Fjerner standard margin */
+}
+
+#gamefield{
+    width: calc(26 * 32px); /* 26 kolonner */
+    height: calc(20 * 32px); /* 20 rækker */
+    border: 4px solid rgb(0, 0, 0);
+    width: fit-content;
+    display: grid;
+    background-color: rgb(202, 200, 205);
+    position: relative; /* Til positionering af #player relativt til #gamefield */
+
+
+}
+
+#background{
+    grid-area: 1 / 1;
+    width: calc(26 * 32px);
+    height: calc(20 * 32px);
+
+}
+
+#items{
+    grid-area: 1 / 1;
+}
+
+#characters{
+    grid-area: 1 / 1;
+}
+
+#player{
+    width: 32px;
+    aspect-ratio: 16 / 20;
+    background-image: url('images/Character 9.png');
+    background-size: 400% 400%;
+    image-rendering: pixelated;
+
+    background-position: -100% 0%;
+
+    position: absolute; /* Absolut positionering i forhold til #gamefield */
+
+
+   
+}
+
+#player.animate{
+    animation-duration: 1s;
+    animation-timing-function: steps(4);
+    animation-iteration-count: infinite;
+}
+
+
+#player.down{
+    background-position: 0% 0%;
+    animation-name: down;
+}
+
+@keyframes down{
+    from{
+        background-position: 0% 0%;
+    }
+    to{
+        background-position: -400% 0%;
+    }
+}
+
+
+
+#player.up{
+    background-position: 0% -100%; /* Adjust these values to match your sprite sheet */
+    animation-name: up;
+}
+
+@keyframes up{
+    from{
+        background-position: 0% -100%;
+    }
+    to{
+        background-position: -400% -100%;
+    }
+}
+
+
+#player.right{
+    background-position: 0% -300%; /* Adjust these values to match your sprite sheet */
+    animation-name: right;
+}
+
+@keyframes right{
+    from{
+        background-position: 0% -300%;
+    }
+    to{
+        background-position: -400% -300%;
+    }
+}
+
+
+#player.left{
+    background-position: 0% -200%; /* Adjust these values to match your sprite sheet */
+    animation-name: left;
+}
+
+@keyframes left{
+    from{
+        background-position: 0% -200%;
+    }
+    to{
+        background-position: -400% -200%;
+    }
+}
+
