@@ -33,7 +33,7 @@ body {
 }
 
 .tile {
-    width: 32px; /* Størrelsen på dine tiles */
+    width: 32px; 
     height: 32px;
     float: left; /* Sørger for at tiles lægger sig ved siden af hinanden */
     background-size: cover; /* Sikrer at billedet dækker hele tile'en */
@@ -75,6 +75,7 @@ body {
 
 }
 
+
 .well {
     background-image: url('simple-assets/images/tiles/well.png');
     image-rendering: pixelated;
@@ -114,8 +115,13 @@ body {
     grid-area: 1 / 1;
 }
 
+.highlight {
+    outline: 2px dashed yellow;
+    translate: 0 0;
+}
+
 #player{
-    width: 32px;
+    width: 30px;
     height: 30px;
     aspect-ratio: 16 / 20;
     background-image: url('images/Character 9.png');
@@ -188,5 +194,20 @@ body {
     to{
         background-position: -400% -200%;
     }
+}
+
+.show-reg-point ::before{
+    content: "";
+    position: absolute;
+    background-color: cyan;
+
+    width: 3px;
+    height: 3px;
+
+    translate: var(--regX) var(--regY);
+}
+
+.show-rect {
+    outline: 2px solid red;
 }
 
