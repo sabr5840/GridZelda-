@@ -5,40 +5,139 @@ body {
     align-items: center;
     min-height: 100vh; /* Sikrer at body tager mindst hele skærmens højde */
     margin: 0; /* Fjerner standard margin */
+    background-color: rgb(255, 255, 255);
 }
 
-#gamefield{
-    width: calc(23 * 32px); 
-    height: calc(19 * 32px); 
-    border: 4px solid rgb(0, 0, 0);
-    width: fit-content;
+#outline {
     display: flex;
-    flex-wrap: wrap; /* Sørger for at tiles går til næste række ved grænsen */
+    justify-content: center;
+}
 
-    background-color: rgb(202, 200, 205);
+#gamefield {
+    border: 2px solid rgb(0, 0, 0);
+    width: fit-content;
+    display: grid;
+    justify-content: center;
     position: relative; /* Til positionering af #player relativt til #gamefield */
 
-
 }
 
-#background{
+
+#background {
     grid-area: 1 / 1;
-    width: calc(23 * 32px); 
-    height: calc(19 * 32px); 
-
+    display: grid;
+    grid-template-columns: repeat(var(--GRID_WIDTH), max-content);
 }
 
-#items{
+#background .tile {
+    width: var(--TILE_SIZE);
+    aspect-ratio: 1 / 1;
+
+    background-repeat: no-repeat;
+    background-size: 100%;
+    image-rendering: pixelated;
+}
+
+#characters{
     grid-area: 1 / 1;
 }
 
-.tile {
-    width: 32px; 
-    height: 32px;
-    float: left; /* Sørger for at tiles lægger sig ved siden af hinanden */
-    background-size: cover; /* Sikrer at billedet dækker hele tile'en */
-    flex: 0 0 32px; /* Sætter flex-grow til 0, flex-shrink til 0, og flex-basis til 32px */
+#player{
+    z-index: 2;
+    width: 24px;
+    height: 30px;
+    background-image: url('images/Character 9.png');
+    background-size: 400% 400%;
+    image-rendering: pixelated;
+    position: relative; /* Til positionering af #player relativt til #gamefield */
 
+}
+
+#player.animate{
+    animation-duration: 0.5s;
+    animation-timing-function: steps(4);
+    animation-iteration-count: infinite;
+}
+
+
+.highlight {
+    outline: 2px dashed yellow;
+    translate: 0 0;
+}
+
+.show-rect {
+    outline: 2px solid red;
+}
+
+.show-reg-point ::before{
+    content: "";
+    position: absolute;
+    background-color: cyan;
+
+    width: 3px;
+    height: 3px;
+
+    translate: var(--regX) var(--regY);
+}
+
+#items {
+    grid-area: 1 / 1;
+    display: grid;
+    grid-template-columns: repeat(var(--GRID_WIDTH), var(--TILE_SIZE));
+    grid-template-rows: repeat(var(--GRID_HEIGHT), var(--TILE_SIZE));
+    position: relative;
+    z-index: 1; 
+    top: 0;
+    left: 0;
+    image-rendering: pixelated;
+
+}
+ 
+.item {
+    width: var(--TILE_SIZE);
+    height: var(--TILE_SIZE);
+    position: relative;
+    grid-area: calc(var(--row) + 1) / calc(var(--col) + 1);
+}
+  
+.take {
+    animation-name: takeAnimation;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+@keyframes takeAnimation {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
+
+.item.gems {
+    background-image: url('simple-assets/images/items/gems.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+
+.item.gold {
+    background-image: url('simple-assets/images/items/gold.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+
+.item.pot {
+    background-image: url('simple-assets/images/items/pot.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
 }
 
 .grass {
@@ -111,32 +210,6 @@ body {
     image-rendering: pixelated;
 }
 
-#characters{
-    grid-area: 1 / 1;
-}
-
-.highlight {
-    outline: 2px dashed yellow;
-    translate: 0 0;
-}
-
-#player{
-    width: 30px;
-    height: 30px;
-    aspect-ratio: 16 / 20;
-    background-image: url('images/Character 9.png');
-    background-size: 400% 400%;
-    image-rendering: pixelated;
-    background-position: -100% 0%;
-    position: absolute; /* Absolut positionering i forhold til #gamefield */
-}
-
-#player.animate{
-    animation-duration: 1s;
-    animation-timing-function: steps(4);
-    animation-iteration-count: infinite;
-}
-
 
 #player.down{
     background-position: 0% 0%;
@@ -196,18 +269,4 @@ body {
     }
 }
 
-.show-reg-point ::before{
-    content: "";
-    position: absolute;
-    background-color: cyan;
-
-    width: 3px;
-    height: 3px;
-
-    translate: var(--regX) var(--regY);
-}
-
-.show-rect {
-    outline: 2px solid red;
-}
 
